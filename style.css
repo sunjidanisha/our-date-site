@@ -1,0 +1,129 @@
+:root{
+  --cream:#fff6ee; --blush:#ffe4ec; --pink:#ff8fb1; --rose:#e0457b; --deep:#7a2845; --sun:#ffc83d; --ink:#4f2236;
+  --shadow:0 14px 40px rgba(224,69,123,.22);
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{
+  font-family:'Nunito',system-ui,-apple-system,'Segoe UI',sans-serif;color:var(--ink);
+  min-height:100vh;min-height:100dvh;overflow-x:hidden;
+  background:
+    radial-gradient(circle at 15% 8%,#ffd3e2 0,transparent 42%),
+    radial-gradient(circle at 88% 92%,#fff0b3 0,transparent 38%),
+    var(--cream);
+}
+button{font:inherit;color:inherit}
+
+/* floating hearts */
+#hearts{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:0}
+.heart{position:absolute;bottom:-50px;will-change:transform;animation:rise linear forwards}
+@keyframes rise{from{transform:translateY(0) rotate(0);opacity:.9}to{transform:translateY(-115vh) rotate(30deg);opacity:0}}
+#confetti{position:fixed;inset:0;pointer-events:none;z-index:20}
+
+/* progress dots */
+#progress{position:fixed;top:14px;left:0;right:0;display:flex;justify-content:center;gap:8px;z-index:5;transition:opacity .3s}
+body[data-screen="welcome"] #progress,body[data-screen="done"] #progress{opacity:0}
+#progress i{width:10px;height:10px;border-radius:50%;background:#fff;border:2px solid var(--pink);transition:.3s}
+#progress i.on{background:var(--rose);border-color:var(--rose);transform:scale(1.15)}
+
+/* layout */
+#app{position:relative;z-index:1;min-height:100vh;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:56px 18px 28px}
+.screen{display:none;width:100%;max-width:470px;text-align:center}
+.screen.active{display:block;animation:in .5s ease backwards}
+@keyframes in{from{opacity:0;transform:translateY(16px)}}
+
+.card{background:rgba(255,255,255,.9);border-radius:28px;padding:28px 20px 26px;box-shadow:var(--shadow);border:2px solid #fff}
+h1,h2{font-family:'Pacifico','Brush Script MT',cursive;font-weight:400;color:var(--rose);line-height:1.25}
+h1{font-size:2rem}
+h2{font-size:1.6rem;margin-bottom:8px}
+.nowrap{white-space:nowrap}
+.eyebrow{font-weight:800;color:var(--deep);margin-bottom:10px;letter-spacing:.02em}
+.sub{margin:8px 0 18px;font-weight:700;color:var(--deep);opacity:.85;line-height:1.5}
+.sub.strong{margin:18px 0 10px;opacity:1}
+.sub.small{margin:18px 0 0;font-size:.95rem}
+.body-text{font-weight:700;line-height:1.9;margin:10px 0 14px;font-size:1.05rem}
+.body-text b{color:var(--rose)}
+.chip-line{display:inline-block;background:var(--blush);padding:8px 16px;border-radius:999px;font-weight:700;margin-bottom:18px}
+.emoji-big{font-size:64px;line-height:1.1;margin-bottom:6px;animation:bob 2.4s ease-in-out infinite}
+@keyframes bob{50%{transform:translateY(-8px) scale(1.05)}}
+
+/* buttons */
+.btn-row{display:flex;gap:14px;justify-content:center;align-items:center;flex-wrap:wrap;min-height:56px}
+.btn{border:0;border-radius:999px;padding:14px 28px;font-size:1.05rem;font-weight:800;cursor:pointer;white-space:nowrap;transition:transform .15s,box-shadow .15s,opacity .2s}
+.btn-yes{background:linear-gradient(135deg,var(--pink),var(--rose));color:#fff;box-shadow:0 8px 20px rgba(224,69,123,.4)}
+.btn-yes:hover:not(:disabled){transform:scale(1.06)}
+.btn-yes:active:not(:disabled){transform:scale(.97)}
+.btn-yes:disabled{opacity:.45;cursor:not-allowed;box-shadow:none}
+.btn.big{white-space:normal;padding:16px 22px;line-height:1.3}
+.btn-no{background:#fff;color:var(--deep);border:2px solid var(--pink)}
+.btn-no.flee,.vibe.flee{position:fixed;z-index:50;margin:0;transition:left .28s cubic-bezier(.3,1.6,.5,1),top .28s cubic-bezier(.3,1.6,.5,1)}
+.ph{display:inline-block;vertical-align:middle}
+.ph.dashed{border:2px dashed var(--pink);border-radius:20px;opacity:.5}
+.hint{min-height:1.4em;margin-top:14px;font-weight:700;font-size:.95rem;color:var(--rose)}
+.link{background:none;border:0;margin-top:16px;font-weight:700;font-size:.9rem;color:var(--deep);opacity:.65;text-decoration:underline;cursor:pointer}
+.link:hover{opacity:1}
+
+/* envelope */
+.envelope{position:relative;display:block;width:250px;height:165px;margin:34px auto 26px;background:#ff9fbd;border:0;border-radius:12px;box-shadow:var(--shadow);cursor:pointer}
+.envelope:hover{animation:wiggle .5s}
+@keyframes wiggle{25%{transform:rotate(-2deg)}75%{transform:rotate(2deg)}}
+.env-letter{position:absolute;left:12%;right:12%;top:8%;height:80%;background:#fff;border-radius:8px;z-index:1;display:flex;align-items:center;justify-content:center;font-size:42px;transition:transform .6s .3s ease}
+.env-front{position:absolute;inset:0;background:#ff86ac;border-radius:12px;clip-path:polygon(0 0,50% 58%,100% 0,100% 100%,0 100%);z-index:2}
+.env-flap{position:absolute;top:0;left:0;right:0;height:62%;background:#ff6b9b;z-index:3;clip-path:polygon(0 0,100% 0,50% 100%);transform-origin:top;transition:transform .6s ease}
+.seal{position:absolute;left:50%;top:50%;width:40px;height:40px;margin:-24px 0 0 -20px;z-index:4;font-size:30px;line-height:40px;text-align:center;animation:pulse 1.3s ease-in-out infinite;transition:opacity .3s}
+@keyframes pulse{50%{transform:scale(1.25)}}
+.envelope.open .env-flap{transform:rotateX(180deg);z-index:0}
+.envelope.open .env-letter{transform:translateY(-62px)}
+.envelope.open .seal{opacity:0}
+
+/* calendar + times */
+.cal-title{font-weight:800;color:var(--rose)}
+.cal{display:grid;grid-template-columns:repeat(7,1fr);gap:6px;margin:10px 0 4px}
+.dow{font-weight:800;font-size:.8rem;color:var(--rose);padding:4px 0}
+.day,.chip{border:2px solid transparent;border-radius:12px;background:#fff;font-weight:700;cursor:pointer;color:var(--ink);transition:.15s;box-shadow:0 2px 6px rgba(224,69,123,.12)}
+.day{aspect-ratio:1}
+.chip{padding:10px 4px;font-size:.92rem}
+.day:hover:not(:disabled),.chip:hover{background:var(--blush)}
+.day.today{border-color:var(--sun)}
+.day.sel,.chip.sel{background:linear-gradient(135deg,var(--pink),var(--rose));color:#fff}
+.day:disabled{opacity:.3;cursor:not-allowed;box-shadow:none}
+.times{display:grid;grid-template-columns:repeat(3,1fr);gap:8px}
+.pick-info{margin:16px 0 14px;font-weight:800;color:var(--deep);min-height:1.4em}
+
+/* vibes */
+.vibes{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px}
+.vibe{display:flex;flex-direction:column;align-items:center;gap:6px;padding:18px 8px;background:#fff;border:2px solid var(--blush);border-radius:20px;cursor:pointer;box-shadow:0 4px 12px rgba(224,69,123,.12);transition:transform .15s,border-color .15s}
+.vibe:hover:not(.flee){transform:translateY(-3px);border-color:var(--pink)}
+.vibe.sel{border-color:var(--rose);background:var(--blush)}
+.vibe .ico{font-size:44px;line-height:1.1}
+.vibe .lbl{font-weight:800;font-size:.98rem}
+
+/* receipt */
+.receipt{border:2px dashed var(--pink);border-radius:18px;padding:14px;background:#fffdf8;margin:6px 0 20px;text-align:left}
+.r-title{font-weight:800;margin-bottom:6px}
+.priceless{color:var(--rose);font-family:'Pacifico',cursive;font-weight:400}
+.r-small{font-size:.88rem;font-weight:700;opacity:.8}
+#card7.shake{animation:shake .5s}
+@keyframes shake{20%,60%{transform:translateX(-8px)}40%,80%{transform:translateX(8px)}}
+
+/* done */
+.summary{list-style:none;text-align:left;margin:6px 0 20px;display:grid;gap:10px}
+.summary li{display:flex;align-items:center;gap:12px;background:var(--blush);padding:12px 16px;border-radius:16px;font-size:1.02rem}
+.summary li span{font-size:1.5rem}
+
+#toast{position:fixed;left:50%;bottom:26px;transform:translateX(-50%) translateY(30px);background:var(--deep);color:#fff;padding:12px 20px;border-radius:999px;font-weight:700;opacity:0;pointer-events:none;transition:.3s;z-index:60;max-width:90vw;text-align:center}
+#toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+
+@media (max-width:380px){
+  h1{font-size:1.7rem}h2{font-size:1.4rem}
+  .envelope{width:220px;height:146px}
+  .btn{padding:13px 22px}
+}
+@media (prefers-reduced-motion:reduce){
+  *{animation-duration:.01ms!important;animation-iteration-count:1!important}
+}
+
+/* WhatsApp button */
+.btn-wa{background:linear-gradient(135deg,#25d366,#128c7e);color:#fff;box-shadow:0 8px 20px rgba(18,140,126,.4);animation:waPulse 1.6s ease-in-out infinite}
+.btn-wa:hover{transform:scale(1.05)}
+@keyframes waPulse{50%{transform:scale(1.045)}}
